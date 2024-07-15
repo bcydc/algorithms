@@ -13,7 +13,7 @@ class Perceptron(MovingCameraScene):
     def construct(self):
         # Perceptron
         perceptron = Circle(radius=0.5, color=BLUE)
-        perceptron_label = Text("Perceptron").scale(0.5).next_to(perceptron, DOWN)
+        perceptron_label = Text("Perceptron").scale(0.5).next_to(perceptron, DOWN * 2)
 
         # Inputs
         input1 = Circle(radius=0.2, color=GREEN).shift(LEFT * 2 + UP)
@@ -45,11 +45,13 @@ class Perceptron(MovingCameraScene):
             ]
         ).shift(DOWN * 2)
 
-        self.play(Create(perceptron), Write(perceptron_label))
-        self.play(Create(input1), Create(input2), Create(input3))
-        self.play(Write(input1_label), Write(input2_label), Write(input3_label))
-        self.play(Create(output), Write(output_label))
-        self.play(Create(connections))
+        self.play(Create(perceptron), Write(perceptron_label), run_time=2)
+        self.play(Create(input1), Create(input2), Create(input3), run_time=2)
+        self.play(
+            Write(input1_label), Write(input2_label), Write(input3_label), run_time=2
+        )
+        self.play(Create(output), Write(output_label), run_time=2)
+        self.play(Create(connections), run_time=2)
 
         self.play(
             *[
@@ -70,6 +72,6 @@ class Perceptron(MovingCameraScene):
             ]
         )
 
-        self.play(Create(neural_network))
+        self.play(Create(neural_network), run_time=2)
 
         self.play(self.camera.frame.animate.scale(2.0).move_to(neural_network))
